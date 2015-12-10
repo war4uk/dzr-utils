@@ -1,7 +1,6 @@
 var gulp = require("gulp");
 var typescript = require("gulp-typescript");
 var tsProjectServer = typescript.createProject('tsconfig.json');
-var tsProjectClient = typescript.createProject('tsconfig-client.json');
 var sourcemaps = require('gulp-sourcemaps');
 
 gulp.task('ts-build-server', function () {

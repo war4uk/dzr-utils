@@ -1,0 +1,24 @@
+<button ng-click="ctrl.getData('test')">press</button>
+
+Команды:
+
+<div ng-repeat="team in ctrl.teams"> 
+	Название: {{team.Name}}
+	<br />
+	Пин: {{team.Code}}	
+	<br />	
+</div> 
+
+<br />
+
+Коды
+
+<div ng-repeat="code in ctrl.codes"> 
+	Код: {{code.Value}}
+	<br />
+	{{code.IsTaken ? ("Взят командой " + code.NameOfTeamTook ): "Не взят"}}	
+	<br />	
+</div> 
+
+
+<button ng-click="ctrl.reset()"> Сбросить информацию о взятии </button>

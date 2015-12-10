@@ -1,10 +1,25 @@
 module SwarmApp.Pages {
 	export interface IMainPageCtrl {
-		test: string;
+		checkCode(code: string): void;
+		message: string;
 	}
 
 	export class MainPageCtrl implements IMainPageCtrl {
-		public test = "my test";
+		public message: string;
+		public checkCode = (code: string) => {
+			this.$http.get("/checkCode", { params: { code: code } })
+			.then(((res: any) => {
+				if (res.data.result) {
+					this.message = "код принят!";
+				} else {
+					this.message = "код  НЕ принят!";
+				}
+			})
+		};
+
+		public static $inject = ['$http'];
+		constructor(private $http: angular.IHttpService) {
+		}
 	}
 }
 
