@@ -1,17 +1,40 @@
-
 {
 	"version": "0.1.0",
 	"command": "gulp",
 	"isShellCommand": true,
-	"args": [
-		"--gulpfile", "swarm/gulpfile.js"
-	],
+	"args": [],
 	"tasks": [
 		{
-			 "args": [
-				 
-			 ],
-			"taskName": "ts-build",
+			"args": [
+				"--gulpfile",
+				"swarm/gulpfile.js"
+			],
+			"taskName": "build",
+			// Make this the default build command.
+			"isBuildCommand": true,
+			// Show the output window only if unrecognized errors occur.
+			"showOutput": "silent",
+			// Use the standard less compilation problem matcher.
+			"problemMatcher": [
+				"$tsc",
+				{
+					"pattern": {
+						"regexp": "\\[[^\\]]+\\] \\[[^\\]]+\\] (\\S+) \\([^\\)]+\\) ([^\\[]+)\\[(\\d+), (\\d+)\\]: (.+)",
+						"file": 2,
+						"line": 3,
+						"column": 4,
+						"severity": 1,
+						"message": 5
+					}
+				}
+			]
+		},
+		{
+			"args": [
+				"--gulpfile",
+				"swarm-client/gulpfile.js"
+			],
+			"taskName": "build",
 			// Make this the default build command.
 			"isBuildCommand": true,
 			// Show the output window only if unrecognized errors occur.

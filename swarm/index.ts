@@ -1,9 +1,11 @@
 import express = require('express');
+import path = require('path');
 
 let app = express();
 app.disable('etag');//disable cache
 console.log(__dirname);
-app.use('/swarm', express.static(__dirname + '/wwwroot'));
+let t = path.join(__dirname, '../swarm_client');
+app.use('/wwwroot', express.static(t));
 
 var server = app.listen(1986, function () {
   var host = server.address().address;
