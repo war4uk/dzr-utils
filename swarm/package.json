@@ -9,7 +9,9 @@
   "author": "",
   "license": "Unlicense",
   "dependencies": {
-    "express": "^4.13.3"
+    "body-parser": "^1.14.1",
+    "express": "^4.13.3",
+    "node-persist": "0.0.8"
   },
   "devDependencies": {
     "gulp-sourcemaps": "^1.6.0",

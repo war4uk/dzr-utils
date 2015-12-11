@@ -1,3 +1,30 @@
-<input type="text" ng-model="ctrl.code" /> <button ng-click="ctrl.checkCode(ctrl.code)">проверить код</button>
+<div ng-if="!ctrl.pin">
+	Введите пин:
+	<input type='text' ng-model="ctrl.pinForTest" />
+	<button ng-click="ctrl.testPin(ctrl.pinForTest)">Отправить</button>
+	<br />{{ctrl.loginMessage}}
+</div>
 
-{{ctrl.message}}
+<div ng-if="ctrl.pin">
+	Приветствуем, {{ctrl.teamName}}!
+	<br />
+	<br />
+	<div ng-if="ctrl.hasTookCode">
+		Вы уже нашли код. Код от приквела: <span style="color: red">{{ctrl.prequelCOde}}</span>
+	</div>
+	<div ng-if="!ctrl.hasTookCode">
+		<input type="text" ng-model="ctrl.code" />
+		<button ng-click="ctrl.checkCode(ctrl.code)">проверить код</button>
+
+		{{ctrl.message}}
+	</div>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<button ng-click="ctrl.forgetPin()">Забыть пин-код</button>
+</div>

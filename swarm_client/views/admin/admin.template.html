@@ -1,24 +1,31 @@
-<button ng-click="ctrl.getData('test')">press</button>
-
-Команды:
-
-<div ng-repeat="team in ctrl.teams"> 
-	Название: {{team.Name}}
+<div ng-if="!ctrl.pass">
+	Авторизуйтесь! <br />
+	<input type="text" ng-model="ctrl.passToTest"/> &nbsp; <button ng-click="ctrl.testPassword(ctrl.passToTest)">Авторизоваться</button>
+</div>
+<div ng-if="ctrl.pass">
+	<button ng-click="ctrl.saveAll()">Сохранить все!</button> &nbsp; <button ng-click="ctrl.getData(ctrl.pass)">Обновить</button>
 	<br />
-	Пин: {{team.Code}}	
-	<br />	
-</div> 
+	<br />
+	<br /> Команды:
+
+	<div ng-repeat="team in ctrl.teams">
+		<br /> Название:
+		<input type="text" ng-model="team.Name" /> &nbsp; Пин:
+		<input type="text" ng-model="team.Code" /> &nbsp;
+		<button ng-click="ctrl.teams.splice($index, 1);">Удалить</button>
+		<br />
+	</div>
+
+	<button ng-click="ctrl.teams.push({})">Добавить команду</button> &nbsp;
+
+	<br /> Коды
+
+	<div ng-repeat="code in ctrl.codes">
+		Код: <input type="text" ng-model="code.Value" /> {{code.IsTaken ? ("Взят командой " + code.NameOfTeamTook ): "Не взят"}}
+		<br />
+	</div>
+	<button ng-click="ctrl.codes.push({Value: '', IsTaken: false, NameOfTeamTook: ''})">Добавить код</button> &nbsp;	
 
 <br />
-
-Коды
-
-<div ng-repeat="code in ctrl.codes"> 
-	Код: {{code.Value}}
-	<br />
-	{{code.IsTaken ? ("Взят командой " + code.NameOfTeamTook ): "Не взят"}}	
-	<br />	
-</div> 
-
-
-<button ng-click="ctrl.reset()"> Сбросить информацию о взятии </button>
+	<button ng-click="ctrl.reset()"> Сбросить информацию о взятии </button>
+</div>
