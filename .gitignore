@@ -1,4 +1,4 @@
 node_modules
-**.js
+**/*.js
 !gulpfile.js
-**.js.map
+**/*.js.map

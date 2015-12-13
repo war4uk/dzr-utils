@@ -8,7 +8,6 @@ var jsonParser = bodyParser.json({
     strict: true
 });
 var adminPass = "dzrKOPAIrulez";
-var prequelCode = "КодОтПриквела";
 app.disable('etag'); //disable cache
 app.use('/wwwroot', express.static(t));
 storage.initSync();
@@ -22,7 +21,8 @@ state = storage.getItemSync('state');
 if (!state) {
     state = {
         Teams: [],
-        Codes: []
+        Codes: [],
+        dzrCode: "код-заглушка " + new Date().getTime()
     };
 }
 var persistState = function () {
@@ -91,12 +91,13 @@ app.get('/checkCode', function (req, res) {
 });
 app.get('/checkPin', function (req, res) {
     var team = getTeamByPin(state.Teams, req.query.pin);
+    var hasTookCode = testIfHasTookCode(team);
     if (!team) {
         res.status(401);
         res.send('Unauthorized');
     }
     else {
-        res.send({ name: team.Name, hasTookCode: testIfHasTookCode(team), prequelCOde: prequelCode });
+        res.send({ name: team.Name, hasTookCode: hasTookCode, prequelCOde: hasTookCode ? state.dzrCode : "<error>" });
     }
 });
 app.get('/reset', function (req, res) {
