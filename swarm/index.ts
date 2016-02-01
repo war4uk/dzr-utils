@@ -76,7 +76,7 @@ let testIfHasTookCode = (team: ITeam): boolean => {
 let getTeamByPin = (teams: ITeam[], pin: string): ITeam => {
     for (let i = 0; i < teams.length; i++) {
         let team = teams[i];
-        if (team.Code === pin) {
+        if (team.Code.toLowerCase() === pin.toLowerCase()) {
             return team;
         }
     }
@@ -97,7 +97,7 @@ app.get('/checkCode', function(req, res) {
             for (let i = 0; i < state.Codes.length; i++) {
                 let code = state.Codes[i];
 
-                if (code.Value === req.query.code) {
+                if (code.Value.toLowerCase() === req.query.code.toLowerCase()) {
                     if (!code.IsTaken) {
                         code.IsTaken = true;
                         code.NameOfTeamTook = teamName;
@@ -134,7 +134,7 @@ app.get('/checkPin', function(req, res) {
 })
 
 app.get('/reset', function(req, res) {
-    if (req.query.pass === adminPass) {
+    if (req.query.pass !== adminPass) {
         res.status(401);
         res.send('Unauthorized');
     }

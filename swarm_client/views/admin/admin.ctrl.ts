@@ -38,7 +38,7 @@ module SwarmApp.Pages {
         public reset = () => {
             if (window.confirm("Сбросить данные о взятии ВСЕХ кодов?")) {
                 this.$scope.$applyAsync(() => {
-                    this.$http.get("/reset")
+                    this.$http.get("/reset", { params: { pass: this.pass }})
                         .then(() => this.getData(this.pass));
                 });
             }
